@@ -62,10 +62,10 @@ class MainActivity : AppCompatActivity() {
 
     fun button(sayi: Int) {
         if (ilkSayiKontrol) {
-            ikinciSayi = (sayi).toInt()
+            ikinciSayi = sayi
             binding.textView.text = "${binding.textView.text} $sayi"
         } else {
-            ilkSayi = (sayi).toInt()
+            ilkSayi = sayi
             binding.textView.text = "$sayi +"
             ilkSayiKontrol = true
         }
