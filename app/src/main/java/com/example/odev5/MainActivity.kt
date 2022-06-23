@@ -6,9 +6,6 @@ import com.example.odev5.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    var ilkSayi = 0
-    var ikinciSayi = 0
-    var ilkSayiKontrol = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -43,33 +40,28 @@ class MainActivity : AppCompatActivity() {
         binding.button9.setOnClickListener {
             button((binding.button9.text.toString()).toInt())
         }
+        binding.buttonArti.setOnClickListener {
+            binding.textView.text = "${binding.textView.text}+"
+        }
         binding.buttonSifirla.setOnClickListener {
             sifirla()
-            binding.textView.text = "0"
         }
         binding.buttonEsittir.setOnClickListener {
-            binding.textView.text = "${binding.textView.text} = ${ilkSayi + ikinciSayi}"
-            sifirla()
+            var tpl = 0
+            val sayilar = binding.textView.text.toString().split("+").toTypedArray()
+            for (i in 0 until sayilar.size) {
+                tpl += sayilar[i].toInt()
+            }
+            binding.textView.text = tpl.toString()
         }
         setContentView(binding.root)
     }
 
     fun sifirla() {
-        ilkSayi = 0
-        ikinciSayi = 0
-        ilkSayiKontrol = false
+        binding.textView.text = ""
     }
 
     fun button(sayi: Int) {
-        if (ilkSayiKontrol) {
-            ikinciSayi = sayi
-            binding.textView.text = "${binding.textView.text} $sayi"
-        } else {
-            ilkSayi = sayi
-            binding.textView.text = "$sayi +"
-            ilkSayiKontrol = true
-        }
-
+        binding.textView.text = "${binding.textView.text}$sayi"
     }
-
 }
